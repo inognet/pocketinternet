@@ -12,7 +12,7 @@ A Pocket Internet for teaching how the Internet really works.
 
 ## Design and Documentation
 
-Documentation for the project can be found under the [docs](https://github.com/inognet/pocketinternet/tree/master/docs) folder.
+Documentation for the project can be found under the [docs](docs/) folder.
 
 ## Demo
 
@@ -50,3 +50,15 @@ We use GitHub to host code, to track issues and feature requests, as well as acc
 
 Please read more about the [contribution guidelines and project code of conduct here](https://github.com/inognet/pocketinternet/blob/master/CONTRIBUTING.md).
 
+## Acknowledgements
+
+Maintained by [Cristian Sirbu](https://github.com/cmsirbu) and [contributors](https://github.com/inognet/pocketinternet/graphs/contributors).
+
+The project was kickstarted through 2 hackathons by the following awesome people:
+
+- Henrik Kramshøj
+- Harry Reeder
+- Evangelos Balaskas
+- Andy Mindnich
+- Samer Lahoud
+- Dónal O Duibhir
