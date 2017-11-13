@@ -1,0 +1,42 @@
+title: Main Demo Lab
+pods:
+  - number: "16.1"
+    kind: web
+    routing:
+      daemon: bird
+      count: 1
+    stacks:
+      - v4
+      - v6
+  - number: "16.2"
+    kind: dns
+    routing:
+      daemon: bird
+      count: 1
+    stacks:
+      - v4
+  - number: "16.3"
+    kind: web
+    routing:
+      daemon: bird
+      count: 1
+    stacks:
+      -v6
+peerings:
+  - left_pod: "16.1"
+    left_router: 1
+    right_pod: "16.2"
+    right_router: 1
+
+  - left_pod: "16.2"
+    left_router: 1
+    right_pod: "16.3"
+    right_router: 1
+
+config:
+  images:
+    web: registry.gitlab.com/pocketinternet/web:0.1
+    dns: registry.gitlab.com/pocketinternet/dns:0.1
+    bird: registry.gitlab.com/pocketinternet/pocketinternet/bird:0.1
+  devel_flags:
+    - no_networks

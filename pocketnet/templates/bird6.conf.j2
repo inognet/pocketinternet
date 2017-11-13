@@ -1,0 +1,23 @@
+protocol kernel {
+    persist;        # Don't remove routes on bird shutdown
+    scan time 20;       # Scan kernel routing table every 20 seconds
+    export all;     # Default is export none
+}
+
+protocol device {
+    scan time 10;       # Scan interfaces every 10 seconds
+}
+
+protocol static {
+}
+
+template bgp basiceBGP {
+    description "My BGP uplink";
+    local as {{ our_as }};
+}
+
+{% for peering in peerings %}
+protocol bgp as{{ peering.remote_as }} from basiceBGP {
+    neighbor {{ peering.remote_ip }} as {{ peering.remote_as }};
+}
+{% endfor %}
