@@ -4,7 +4,7 @@ A Pocket Internet for teaching how the Internet really works.
 
 ## Mission statement & Background
 
-**Background:** providing a fully automated lab environment for running training workshops or testing features at scale. The idea was originally formulated by [Cristian Sirbu](https://trueneutral.eu) for the [NetEngCode Hackathon](https://github.com/cmsirbu/netengcodehack/blob/master/20170422-dublin-hack.md) in Dublin (Apr 2017) and subsequently kickstarted by an awesome team at the RIPE NCC IPv6 Hackathon in Copenhagen (Nov 2017).
+**Background:** providing a fully automated lab environment for running training workshops or testing features at scale. The idea was originally formulated by [Cristian Sirbu](https://trueneutral.eu) for the [NetEngCode Hackathon](https://github.com/cmsirbu/netengcodehack/blob/master/20170422-dublin-hack.md) in Dublin (Apr 2017) and subsequently kickstarted by an awesome team at the [RIPE NCC IPv6 Hackathon](docs/preso/20171105_Pocket_Internet.pdf) in Copenhagen (Nov 2017).
 
 **Idea:** an infinitely scalable topology that interconnects small pods (ISPs) into a procedurally generated network (the Internet). Each pod design would be based on a blueprint inspired from real life SPs (e.g. transit, IXP, broadband, content) and be as lightweight as possible, while still allowing for enough policy/complexity to be built in, so that many of them can be run at the same time on IaaS at low cost.
 
