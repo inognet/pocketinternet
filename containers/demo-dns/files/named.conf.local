@@ -1,0 +1,32 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "p16001.lab" {
+	type master;
+	file "/etc/bind/dbp16001.lab";
+};
+
+zone "p16002.lab" {
+        type master;
+        file "/etc/bind/dbp16002.lab";
+};
+
+zone "p17001.lab" {
+        type master;
+        file "/etc/bind/dbp17001.lab";
+};
+
+zone "bb.lab" {
+        type master;
+        file "/etc/bind/dbbb.lab";
+};
+
+zone "demo.lab" {
+        type master;
+        file "/etc/bind/dbdemo.lab";
+};

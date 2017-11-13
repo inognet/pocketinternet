@@ -1,0 +1,21 @@
+;
+; BIND data file for local loopback interface
+;
+$ORIGIN p17001.lab.
+$TTL	604800
+@	IN	SOA	localhost. root.localhost. (
+			2011040101      ; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	dns.demo.lab.
+s1.p17001.lab.	IN	A	10.17.1.101
+s1.p17001.lab.	IN	AAAA	FD00:17:1::101
+s1v4.p17001.lab.  IN      A       10.17.1.101
+s1v6.p17001.lab.  IN      AAAA    FD00:17:1::101
+r1.p17001.lab.  IN      A       10.17.1.11
+r1.p17001.lab.  IN      AAAA    FD00:17:1::11
+r1v4.p17001.lab.  IN      A       10.17.1.11
+r1v6.p17001.lab.  IN      AAAA    FD00:17:1::11
