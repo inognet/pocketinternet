@@ -45,7 +45,7 @@
 
 ## Sample IP addressing diagram for three simple PODs
 
-![IP addressing example](docs/img/Sample_IP_addressing.png)
+![IP addressing example](/docs/img/Sample_IP_addressing.png)
 
 
 ## Addressing explained
