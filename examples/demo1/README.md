@@ -75,6 +75,7 @@ a441f7feae41        pocketinternet/http-static:0.2   "bash -c 'ip route..."   5 
 
 You can SSH directly into the client container (10.17.1.101). To run commands in the other containers you can start a shell using `docker-compose exec <containername> /bin/bash`.
 
+To get an overall glimpse of the state of the lab you can execute the provided testing script with `sh testing.sh`.
 
 ## Cleanup
 

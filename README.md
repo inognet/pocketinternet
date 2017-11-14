@@ -16,7 +16,7 @@ Documentation for the project can be found under the [docs](docs/) folder.
 
 ## Demo
 
-A pre-packaged VM with the demo topology showcased at the RIPE hackathon is in the works.
+A pre-packaged VM with the demo topology showcased at the RIPE hackathon is in the works. You can find the code and instructions for running it in your own VM [here](examples/demo1).
 
 ## Setup
 
