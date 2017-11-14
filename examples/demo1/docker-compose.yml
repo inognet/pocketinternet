@@ -1,0 +1,131 @@
+version: '2.1'
+services:
+  client17_1:
+    image: pocketinternet/client:0.2
+    cap_add:
+    - ALL
+    links:
+    - bird17_1
+    command: bash -c "ip route delete default && ip route add default via 10.17.1.11 && ip -6 route delete default && ip -6 route add default via fd00:17:1::11 && /usr/sbin/sshd -D"
+    networks:
+      lan_net_17_1:
+        ipv4_address: 10.17.1.101
+        ipv6_address: fd00:17:1::101
+
+  bird17_1:
+    image: pocketinternet/bird:0.2
+    volumes:
+    - ./bird17_1:/etc/bird
+    cap_add:
+    - ALL
+    privileged: true
+    links:
+    - bird16_1
+    command: bash -c "sysctl net.ipv6.conf.all.forwarding=1 && ip route delete default && ip -6 route delete default && bird6 && bird -d"
+    networks:
+      lan_net_17_1:
+        ipv4_address: 10.17.1.11
+        ipv6_address: fd00:17:1::11
+      backbone_net:
+        ipv4_address: 172.17.1.1
+        ipv6_address: fd00:bb::17:1:1
+  bird16_1:
+    image: pocketinternet/bird:0.2
+    volumes:
+    - ./bird16_1:/etc/bird
+    cap_add:
+    - ALL
+    privileged: true
+    command: bash -c "sysctl net.ipv6.conf.all.forwarding=1 && ip route delete default && ip -6 route delete default && bird6 && bird -d"
+    networks:
+      backbone_net:
+        ipv4_address: 172.16.1.1
+        ipv6_address: fd00:bb::16:1:1
+      lan_net_16_1:
+        ipv4_address: 10.16.1.11
+        ipv6_address: fd00:16:1::11
+  bind16_1:
+    image: pocketinternet/demo-dns:0.2
+    cap_add:
+    - ALL
+    links:
+    - bird16_1
+    command: bash -c "ip route delete default && ip route add default via 10.16.1.11 && ip -6 route delete default && ip -6 route add default via fd00:16:1::11 && named -c /etc/bind/named.conf -g"
+    networks:
+      lan_net_16_1:
+        ipv4_address: 10.16.1.101
+        ipv6_address: fd00:16:1::101
+  bird16_2:
+    image: pocketinternet/bird:0.2
+    volumes:
+    - ./bird16_2:/etc/bird
+    cap_add:
+    - ALL
+    privileged: true
+    command: bash -c "sysctl net.ipv6.conf.all.forwarding=1 && ip route delete default && ip -6 route delete default && bird6 && bird -d"
+    networks:
+      backbone_net:
+        ipv4_address: 172.16.2.1
+        ipv6_address: fd00:bb::16:2:1
+      lan_net_16_2:
+        ipv4_address: 10.16.2.11
+        ipv6_address: fd00:16:2::11
+  nginx16_2:
+    image: pocketinternet/http-static:0.2
+    volumes:
+    - ./web:/var/www/html
+    links:
+    - bird16_2
+    cap_add:
+    - ALL
+    privileged: true
+    command: bash -c "ip route delete default && ip route add default via 10.16.2.11 && ip -6 route delete default && ip -6 route add default via fd00:16:2::11 && nginx -g 'daemon off;'"
+    networks:
+      lan_net_16_2:
+        ipv4_address: 10.16.2.101
+        ipv6_address: fd00:16:2::101
+  client16_2:
+    image: pocketinternet/client:0.2
+    cap_add:
+    - ALL
+    links:
+    - bird16_2
+    command: bash -c "ip route delete default && ip route add default via 10.16.2.11 && ip -6 route delete default && ip -6 route add default via fd00:16:2::11 && /usr/sbin/sshd -D"
+    networks:
+      lan_net_16_2:
+        ipv4_address: 10.16.2.102
+        ipv6_address: fd00:16:2::102
+
+networks:
+  backbone_net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.0.0/12
+      - subnet: fd00:bb::/64
+  lan_net_16_1:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.16.1.0/24
+      - subnet: fd00:16:1::/64
+  lan_net_16_2:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.16.2.0/24
+      - subnet: fd00:16:2::/64
+  lan_net_17_1:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.17.1.0/24
+      - subnet: fd00:17:1::/64
