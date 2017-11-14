@@ -1,5 +1,6 @@
-FROM pocketinternet/base:0.4
-MAINTAINER Pocket Internet Team
+FROM pocketinternet/base:0.5
+LABEL Description="Pocket Internet HTTP Static image" Version="0.2" Maintainer="Pocket Internet Team"
+
 
 RUN apt-get update
 RUN apt-get install --no-install-recommends --no-install-suggests -y nginx
