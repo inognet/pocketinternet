@@ -15,8 +15,8 @@ setup(
     version=pocketnet.__version__,
     packages=['pocketnet'],
     author='PocketInternet Team',
-    description="RIPE NCC Hackathon Version 6",
-    
+    description="PocketInternet Orchestrator",
+    url='https://github.com/inognet/pocketinternet',
     install_requires=install_requires,
     scripts=['bin/pocketinternet']
 )
