@@ -22,7 +22,7 @@ def run():
     parser.add_argument('-c', '--config',
             dest='config_file',
             default="lab.yml",
-            help='YML Configuration File')
+            help='YAML Configuration File')
 
     subparsers = parser.add_subparsers(help="Sub Commands", dest="subparser")
     subparsers.add_parser('configure-docker', help="Perform one-off configuration of docker daemon.")
@@ -35,6 +35,7 @@ def run():
     if args.subparser == "configure-docker":
         configure_docker()
     elif args.subparser == "setup":
+        # TODO Modularize and move out of run() function
         print("[PocketInternet] Starting Setup Process")
 
         print("[PocketInternet] Loading Lab Configuration")
@@ -99,6 +100,7 @@ def run():
             else:
                 print("[PocketInternet] Pod kind of '{}' was not recognised.".format(pod_kind))
     elif args.subparser == "teardown":
+        # TODO
         pass
 
 if __name__ == "__main__":

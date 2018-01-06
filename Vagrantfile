@@ -7,18 +7,23 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
   config.vm.provider "virtualbox" do |vb|
-    # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    # Customize the amount of memory on the VM
+    vb.memory = "1024"
+  end
+
+  config.vm.provision "docker" do |d|
+    # Installs Docker and pulls pocketinternet images
+    # https://www.vagrantup.com/docs/provisioning/docker.html
+    d.pull_images "pocketinternet/http-static:0.2"
+    d.pull_images "pocketinternet/demo-dns:0.2"
+    d.pull_images "pocketinternet/client:0.2"
+    d.pull_images "pocketinternet/bird:0.2"
   end
 
   config.vm.provision "shell", inline: <<-SHELL
-    # apt-get update
-    apt-get install --no-install-recommends --no-install-suggests python-pip python-setuptools
-    pip install docker-compose
+    apt-get install --no-install-recommends --no-install-suggests -y python-pip python-setuptools
+    cd /vagrant
+    python setup.py develop
+    pocketinternet configure-docker
   SHELL
-
-  config.vm.provision "docker" do |d|
-    # Installs Docker by default
-    # https://www.vagrantup.com/docs/provisioning/docker.html
-  end
 end
